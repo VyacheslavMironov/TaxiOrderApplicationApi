@@ -19,4 +19,20 @@ use App\Http\Controllers\Api\UserController;
 //     return $request->user();
 // });
 
-Route::post('/create', [UserController::class, 'create']);
+// Группа маршрутов для пользователя
+Route::prefix('user')->group(function(){
+    Route::post('/create', [UserController::class, 'create']);
+    Route::get('/get-code/{phone:phone}', [UserController::class, 'get_code']);
+    Route::post('/auth', [UserController::class, 'auth']);
+    Route::middleware('auth:sanctum')->group(function(){
+        Route::delete('/logout/{user}', [UserController::class, 'logout']);
+    });
+    
+});
+
+Route::prefix('order')->group(function(){
+    // ....
+    Route::prefix('task', function(){
+        // ....
+    });
+});

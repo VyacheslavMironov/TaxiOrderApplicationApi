@@ -17,7 +17,8 @@ return new class extends Migration
             $table->char('phone', 18)->unique();
             $table->enum('gender', [1, 2]);
             $table->float('rating')->default(5.0);
-            $table->enum('role', ['Клиент', 'Водитель', 'Администратор']);
+            $table->enum('role', ['Клиент', 'Водитель', 'Администратор'])
+                ->default('Клиент');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -33,4 +33,15 @@ class User extends Authenticatable
     protected $hidden = [
         'remember_token',
     ];
+
+    static function CreateBearerToken($user) : string 
+    {
+        $user->tokens()->delete();
+        return $user->createToken('user_token')->plainTextToken;
+    }
+
+    static function DeleteBearerToken($user) 
+    {
+        $user->tokens()->delete();
+    }
 }
